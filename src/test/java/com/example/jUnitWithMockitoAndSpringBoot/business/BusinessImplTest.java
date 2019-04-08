@@ -35,4 +35,14 @@ public class BusinessImplTest {
         int actualValue = business.calculateSum(new int[]{2});
         Assert.assertEquals(2,actualValue);
     }
+
+    @Test
+    public void calculateSumUsingDataService() {
+        //set lambda implementation for interface
+        business.setSomeDataService(() -> new int[]{1,3,5});
+        int actualValue = business.calculateSumUsingDataService();
+        Assert.assertEquals(9,actualValue);
+    }
+
+
 }

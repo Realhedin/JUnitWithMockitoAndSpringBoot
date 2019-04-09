@@ -1,27 +1,27 @@
 package com.example.jUnitWithMockitoAndSpringBoot.business;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * @author dkorolev
  *         Date: 4/8/2019
  *         Time: 4:49 PM
  */
+@RunWith(MockitoJUnitRunner.class) //to activate injection by Mockito
 public class BusinessImplMockTest {
 
+    @InjectMocks //will inject all of the mocks
     BusinessImpl business;
+
+    @Mock //auto-mocking service
     SomeDataService mockService;
 
-
-    @Before
-    public void init() {
-        business = new BusinessImpl();
-        mockService = Mockito.mock(SomeDataService.class);
-        business.setSomeDataService(mockService);
-    }
 
     @Test
     public void calculateSumUsingDataService() {

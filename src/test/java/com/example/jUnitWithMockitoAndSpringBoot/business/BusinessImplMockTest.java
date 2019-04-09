@@ -1,11 +1,16 @@
 package com.example.jUnitWithMockitoAndSpringBoot.business;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 /**
@@ -21,24 +26,39 @@ public class BusinessImplMockTest {
 
     @Mock //auto-mocking service
     SomeDataService mockService;
+    @Mock
+    List<Integer> mockList;
 
 
     @Test
     public void calculateSumUsingDataService() {
-        Mockito.when(mockService.retrieveAllData()).thenReturn(new int[]{1,3,5});
-        Assert.assertEquals(9, business.calculateSumUsingDataService());
+        when(mockService.retrieveAllData()).thenReturn(new int[]{1,3,5});
+        assertEquals(9, business.calculateSumUsingDataService());
     }
 
     @Test
     public void calculateSumUsingDataService_empty() {
-        Mockito.when(mockService.retrieveAllData()).thenReturn(new int[]{});
-        Assert.assertEquals(0, business.calculateSumUsingDataService());
+        when(mockService.retrieveAllData()).thenReturn(new int[]{});
+        assertEquals(0, business.calculateSumUsingDataService());
     }
 
     @Test
     public void calculateSumUsingDataService_another() {
-        Mockito.when(mockService.retrieveAllData()).thenReturn(new int[]{2,4,6});
-        Assert.assertEquals(12, business.calculateSumUsingDataService());
+        when(mockService.retrieveAllData()).thenReturn(new int[]{2,4,6});
+        assertEquals(12, business.calculateSumUsingDataService());
+    }
+
+    @Test
+    public void complexMethodCall() {
+        //SUT
+        when(mockService.retrieveAllData()).thenReturn(new int[]{1, 2, 3});
+        business.complexMethodCall();
+        //verify
+        verify(mockList).add(1); //check that internal call of list was done
+        ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
+        verify(mockList).add(captor.capture()); //check that parameter was as expected (below)
+        assertEquals(Integer.valueOf(1),captor.getValue());
+
     }
 
 

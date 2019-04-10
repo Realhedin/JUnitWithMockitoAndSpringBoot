@@ -36,7 +36,7 @@ public class SystemUnderTestTestStatic {
         //usual mock behavior. mocking method returns what we want
         when(dependency.retrieveAllStats()).thenReturn(Arrays.asList(1, 2, 3));
 
-        //Power mock usage to mock Class with static method
+        //Power mock usage to mock Class with static method !
         PowerMockito.mockStatic(UtilityClass.class);
         //mockito approach to return what do we want
         when(UtilityClass.staticMethod(anyLong())).thenReturn(150);

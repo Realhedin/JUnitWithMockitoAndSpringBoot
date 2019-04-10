@@ -21,7 +21,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ UtilityClass.class})
-public class SystemUnderTestTest {
+public class SystemUnderTestTestStatic {
 
     @Mock
     Dependency dependency;

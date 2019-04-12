@@ -1,7 +1,6 @@
 package com.example.jUnitWithMockitoAndSpringBoot.springBootPart.conroller;
 
 import com.example.jUnitWithMockitoAndSpringBoot.springBootPart.controller.ItemController;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +35,9 @@ public class ItemControllerTest {
         MvcResult mvcResult = mockMvc.perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Ball\",\"price\":10,\"quantity\":100}"))
+                //JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
                 .andReturn();
-        //verify response
-        Assert.assertEquals("{\"id\":1,\"name\":\"Ball\",\"price\":10,\"quantity\":100}", mvcResult.getResponse().getContentAsString());
+
     }
 
 }

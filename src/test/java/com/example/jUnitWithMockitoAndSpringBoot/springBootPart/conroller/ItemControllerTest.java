@@ -24,14 +24,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  *         Time: 2:16 PM
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = ItemController.class)   //load only Web context => and only Hello
+@WebMvcTest(value = ItemController.class)   //load only Web context => and only ItemController
 public class ItemControllerTest {
 
     @Autowired
     private MockMvc mockMvc; //main class for mocking controllers
 
     @MockBean
-    private ItemBusinessService businessService;
+    private ItemBusinessService businessService; //mockBean for mocking spring bean
 
     @Test
     public void dummyItemTest_basic() throws Exception {
@@ -50,7 +50,7 @@ public class ItemControllerTest {
     @Test
     public void itemFromBusinessService_basic() throws Exception {
 
-        when(businessService.retrieveHardcodedItem()).thenReturn(new Item(2, "Item2", 10, 10));
+        when(businessService.retrieveHardcodedItem()).thenReturn(new Item(2, "Item2", 10, 10)); //common mockito mocking method
 
         //create builder for GET with uri: "/itemFromBusinessService" and MediaType: application/json
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders

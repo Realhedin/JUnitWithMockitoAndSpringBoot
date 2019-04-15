@@ -1,20 +1,28 @@
 package com.example.jUnitWithMockitoAndSpringBoot.springBootPart.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
 /**
  * @author dkorolev
  *         Date: 4/12/2019
  *         Time: 12:40 PM
  */
+@Entity
 public class Item {
 
+    @Id
+    private int id;
 
-     int id;
+    private String name;
 
-    String name;
+    private int price;
 
-    int price;
+    private int quantity;
 
-    int quantity;
+    @Transient   //won't be stored in DB
+    private int value;
 
 
     public Item(int id, String name, int price, int quantity) {
@@ -54,6 +62,14 @@ public class Item {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
 

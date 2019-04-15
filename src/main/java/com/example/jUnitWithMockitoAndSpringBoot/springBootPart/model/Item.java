@@ -25,6 +25,10 @@ public class Item {
     private int value;
 
 
+    //default constructor
+    public Item() {
+    }
+
     public Item(int id, String name, int price, int quantity) {
         this.id = id;
         this.name = name;

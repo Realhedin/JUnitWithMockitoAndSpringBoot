@@ -1,5 +1,7 @@
 package com.example.jUnitWithMockitoAndSpringBoot.springBootPart.controller;
 
+import java.util.List;
+
 import com.example.jUnitWithMockitoAndSpringBoot.springBootPart.business.ItemBusinessService;
 import com.example.jUnitWithMockitoAndSpringBoot.springBootPart.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,11 @@ public class ItemController {
     @GetMapping("/itemFromBusinessService")
     public Item itemFromBusinessService() {
         return businessService.retrieveHardcodedItem();
+    }
+
+    @GetMapping("/getAllItemsFromDB")
+    public List<Item> retreiveAllItems() {
+        return businessService.retrieveAllItems();
     }
 
 }

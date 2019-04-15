@@ -2,6 +2,8 @@ package com.example.jUnitWithMockitoAndSpringBoot.springBootPart.conroller;
 
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+
 import com.example.jUnitWithMockitoAndSpringBoot.springBootPart.business.ItemBusinessService;
 import com.example.jUnitWithMockitoAndSpringBoot.springBootPart.controller.ItemController;
 import com.example.jUnitWithMockitoAndSpringBoot.springBootPart.model.Item;
@@ -61,6 +63,26 @@ public class ItemControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("{id:2, name:Item2, price:10, quantity:10}"))
                 //JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
+                .andReturn();
+    }
+
+
+    @Test
+    public void retrieveAllItemsTest() throws Exception {
+
+        when(businessService.retrieveAllItems())
+                .thenReturn(Arrays.asList(new Item(2, "Item2", 10, 10),
+                        new Item(3, "Item3", 20, 20)));
+
+        //create builder for GET with uri: "/getAllItemsFromDB" and MediaType: application/json
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/getAllItemsFromDB")
+                .accept(MediaType.APPLICATION_JSON);
+        //call "/getAllItemsFromDB" GET application/json and get result
+        MvcResult mvcResult = mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content()
+                        .json("[{id:2, name:Item2, price:10, quantity:10},{id:3, name:Item3, price:20, quantity:20}]"))
                 .andReturn();
     }
 }
